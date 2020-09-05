@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Define and build isometric renderings of procedurally generated landscapes.">
+    <meta name="author" content="https://retroscapes.io">
+    <meta http-equiv="refresh" content="0;url=https://github.com/retroscapes" />
+    <title>retroscapes</title>
+    <script>
+      const favIcon ="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";
+      const docHead = document.getElementsByTagName('head')[0];
+      const newLink = document.createElement('link');
+      newLink.rel = 'shortcut icon';
+      newLink.type = 'image/x-icon';
+      newLink.href = 'data:image/png;base64,'+favIcon;
+      docHead.appendChild(newLink);
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <style>
+      html { height:100%; }
+      body {
+        height:100%;
+        margin:0px; padding:0px;
+        background-color:#FFFFFF; color:#555555;
+        font-family:'Raleway',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+      }
+      div { width:100%; height:100%; display:flex; align-items:center; justify-content:center; text-align:center; }
+      span { display:inline-block; }
+      a { text-decoration:none; font-weight:bold; color:#000000; }
+      a:hover { text-decoration:underline; }
+      .noselect {
+        -webkit-touch-callout:none;
+          -webkit-user-select:none;
+           -khtml-user-select:none;
+             -moz-user-select:none;
+              -ms-user-select:none;
+                  user-select:none;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <span class="noselect">
+        Source code for the&nbsp;<a href="https://retroscapes.io">retroscapes</a>&nbsp;library is available&nbsp;<a href="https://github.com/retroscapes">on GitHub</a>.
+      </span>
+    </div>
+  </body>
+</html>
