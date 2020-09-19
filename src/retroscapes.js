@@ -3,7 +3,7 @@
  * procedurally generated landscapes, with particular support for the HTML
  * Canvas API.
  *
- * Version: 0.1.0
+ * Version: 0.2.0
  * Web: https://retroscapes.io
  */
 (function (global) {
@@ -1175,6 +1175,18 @@
       return new Vector({ "x": Math.floor(coordinates.x), "y": Math.floor(coordinates.y) });
     }
 
+    alignCanvasCoordinatesToGrid (coordinates, factor) {
+      factor = (factor == null) ? 1 : factor;
+      return {
+        "x":
+          Math.floor(coordinates.x / (this.uX * 2 * factor)) *
+          (this.uX * 2 * factor),
+        "y":
+          Math.floor(coordinates.y / (this.uY * 2 * factor)) *
+          (this.uY * 2 * factor)
+      }
+    }
+
     gridPlaneCellVisibleMap (func, maxHeight) {
       maxHeight = (maxHeight == null) ? 7 : maxHeight;
       const gridWidthHalf = Math.floor((this.dimensions.width / this.uX) / 2);
@@ -1204,21 +1216,27 @@
   }
 
   class EffectPlateSquare extends Effect {
+    constructor (distance, offset) {
+      super();
+      this.distance = (distance == null) ? 1 : distance;
+      this.offset = (offset == null) ? { "x": 0, "y": 0 } : offset;
+    }
+
     calc (coordinates, grid) {
       const cs = (grid)
         ? this.projection.getOffsetFromCenterGrid(coordinates)
         : this.projection.canvasToPlaneGrid(coordinates);
-      cs.x -= 3;
-      cs.y -= 3;
+      cs.x += this.offset.x;
+      cs.y += this.offset.y;
       const unit = 40 / this.projection.unit;
-      const distance = Math.floor(
-        0.88 * unit * (this.projection.dimensions.width / 100)
+      const dist = Math.floor(
+        this.distance * unit * (this.projection.dimensions.width / 100)
       );
       const start = 0.8;
       const end = 0.8;
       const slope = 0;
-      const aDist = Math.abs((cs.y + (slope * cs.x)) / (distance * end));
-      const bDist = Math.abs((cs.x + (slope * cs.y)) / (distance * end));
+      const aDist = Math.abs((cs.y + (slope * cs.x)) / (dist * end));
+      const bDist = Math.abs((cs.x + (slope * cs.y)) / (dist * end));
       return [start, aDist, bDist];
     }
 
@@ -2289,7 +2307,7 @@
     "Render": Render,
 
     // Library metadata.
-    "version": "0.1.0"
+    "version": "0.2.0"
   };
 
   global.retroscapes = retroscapes;

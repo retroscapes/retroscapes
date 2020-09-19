@@ -3,9 +3,9 @@ The **retroscapes** library helps define and build isometric renderings of proce
 
 ## Usage
 
-Any released version of the retroscapes library can be incorporated as shown below (`0.1.0` can be replaced with the version number of any release) within non-commercial, open-source projects.
+Any released version of the retroscapes library can be incorporated as shown below (`0.2.0` can be replaced with the version number of any release) within non-commercial, open-source projects.
 ```html
-<script src="https://retroscapes.codes/0.1.0/retroscapes.js"></script>
+<script src="https://retroscapes.codes/0.2.0/retroscapes.js"></script>
 ```
 
 ## Conventions

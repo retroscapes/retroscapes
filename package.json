@@ -1,6 +1,6 @@
 {
   "name": "retroscapes",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Library for defining and building isometric renderings of procedurally generated landscapes, with particular support for the HTML Canvas API.",
   "homepage": "https://retroscapes.io",
   "repository": {
