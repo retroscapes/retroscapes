@@ -3,7 +3,7 @@
  * procedurally generated landscapes, with particular support for the HTML
  * Canvas API.
  *
- * Version: 0.2.0
+ * Version: 0.3.0
  * Web: https://retroscapes.io
  */
 (function (global) {
@@ -439,7 +439,7 @@
   }
 
   class Color extends Array {
-    constructor (parameter) {
+    constructor (parameter, attributes) {
       super();
 
       // Convert hex color code.
@@ -454,6 +454,14 @@
       // Add an opacity value if it is not present.
       if (this.length === 3) {
         this.push(1.0);
+      }
+
+      if ('within' in parameter) {
+        this.within = parameter.within;
+      }
+
+      for (const a in attributes) {
+        this[a] = attributes[a];
       }
     }
 
@@ -625,6 +633,10 @@
       this.pattern = p;
     }
 
+    setLit (l) {
+      this.lit = l;
+    }
+
     _within (color, within, fx, args) {
       const range = parseInt(within.slice(0, -1));
       const scale = 100 - (range / 2) + Math.round(fx.randReal(args) * range);
@@ -642,6 +654,9 @@
     emitFaceColor (fx, args) {
       if (this.face.within != null) {
         return this._within(this.face.color, this.face.within, fx, args);
+      }
+      if (this.face.color.within != null) {
+        return this._within(this.face.color, this.face.color.within, fx, args);
       }
       return this.face.color;
     }
@@ -804,6 +819,12 @@
       this.lateral.pattern = JSON.parse(JSON.stringify(p));
       this.top.pattern = JSON.parse(JSON.stringify(p));
     }
+
+    setLit (l) {
+      this.mesial.lit = l;
+      this.lateral.lit = l;
+      this.top.lit = l;
+    }
   }
 
   class Concept {
@@ -927,6 +948,10 @@
 
     setPattern_ (p) {
       this.$.look.setPattern_(p);
+    }
+
+    setLit (l) {
+      this.$.look.setLit(l);
     }
   }
 
@@ -1080,6 +1105,12 @@
     setPattern_ (p) {
       for (const a in this) {
         this[a].setPattern_(p);
+      }
+    }
+
+    setLit (l) {
+      for (const a in this) {
+        this[a].setLit(l);
       }
     }
   }
@@ -2307,7 +2338,7 @@
     "Render": Render,
 
     // Library metadata.
-    "version": "0.2.0"
+    "version": "0.3.0"
   };
 
   global.retroscapes = retroscapes;
